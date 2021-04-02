@@ -1,9 +1,9 @@
 from cmapingest import DB
-import SOT_relations as SOT
+from cmapsync import SOT_relations as SOT
 import numpy as np
 
 
-def check_table_exists(Table_Name, Server):
+def check_table_exists(Table_Name, server):
     """Returns a bool depending if table exists on specified server
 
     Returns:
@@ -12,7 +12,7 @@ def check_table_exists(Table_Name, Server):
     qry = (
         f"""SELECT * FROM information_schema.tables WHERE table_name = '{Table_Name}'"""
     )
-    df = DB.dbRead(qry, server=Server)
+    df = DB.dbRead(qry, server=server)
     if df.empty == True:
         table_exists_bool = False
     else:
@@ -55,4 +55,4 @@ def get_metadata_tables():
     return metadata_tables
 
 
-metadata_tables = get_metadata_tables()
+# metadata_tables = get_metadata_tables()
