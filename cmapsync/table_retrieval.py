@@ -1,6 +1,49 @@
 from cmapingest import DB
-from cmapsync import SOT_relations as SOT
+import SOT_relations as SOT
 import numpy as np
+import pandas as pd
+
+
+def checksum_tables(Table_Name):
+    if len(SOT.Children) > 1:
+        pass
+        # checksum for all tables
+
+
+def checksum(Table_Name, Parent_Server, Child_Server):
+    """Takes Table name and name of two servers, computes checksum and returns dict if
+
+    Returns:
+        Dict: Dictionary containing Table_Name as well as server names, or None.
+    """
+
+    qry = f"""SELECT SUM(CAST(CHECKSUM(*) AS BIGINT)) from [{Table_Name}]"""
+    parent_checksum = DB.dbRead(qry, server=Parent_Server)
+    child_checksum = DB.dbRead(qry, server=Child_Server)
+    if parent_checksum.iloc[0][0] != child_checksum.iloc[0][0]:
+        checksum_result_dict = {
+            "Table_Name": Table_Name,
+            "Parent_Server": Parent_Server,
+            "Child_Server": Child_Server,
+        }
+    else:
+        checksum_result_dict = None
+    return checksum_result_dict
+
+
+def retrieve_diff_between_tables(Table_Name, Parent_Server, Child_Server):
+    """Retrieves table from parent and child databases, finds differance between both
+    Returns:
+        Pandas DataFrame: Result diff DataFrame
+    """
+    qry = f"""SELECT * FROM {Table_Name}"""
+    parent_df = DB.dbRead(qry, server=Parent_Server)
+    child_df = DB.dbRead(qry, server=Child_Server)
+    merged = parent_df.merge(child_df, indicator=True, how="left")
+    missing_rows_from_child = merged.loc[merged["_merge"] != "both"].drop(
+        ["_merge"], axis=1
+    )
+    return missing_rows_from_child
 
 
 def check_table_exists(Table_Name, server):
@@ -55,4 +98,4 @@ def get_metadata_tables():
     return metadata_tables
 
 
-# metadata_tables = get_metadata_tables()
+metadata_tables = get_metadata_tables()

@@ -3,8 +3,6 @@ from pandas._testing import assert_frame_equal
 from cmapsync import table_retrieval as TR
 from cmapsync import SOT_relations as SOT
 
-"""example from cmapingest"""
-
 
 def test_check_table_exists():
     success_table_bool = TR.check_table_exists("tblDatasets", server=SOT.Parent)
