@@ -113,7 +113,18 @@ def get_DB_tables():
         Pandas Series: Series of all tables in DB
     """
     SOT_tables = DB.dbRead(
-        f"""SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_CATALOG='{SOT.db}' AND TABLE_NAME <> 'sysdiagrams'""",
+        f"""SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_CATALOG='{SOT.db}' AND TABLE_NAME <> 'sysdiagrams' and TABLE_NAME NOT IN 
+        ('tblArgoBGC_REP',
+        'tblArgo_Metadata',
+        'tblCyanoML',
+        'tblCyanoML_sst',
+        'tblCyanoML_sst_po4',
+        'tblHOT_Bottle_ALOHA',
+        'tblHOT_Bottle_HALE',
+        'tblHOT_Bottle_KAENA',
+        'tblHOT_Bottle_KAHE',
+        'tblHOT_Bottle_WHOTS50',
+        'tblHOT_Bottle_whots52')""",
         server=SOT.Parent,
     ).iloc[:, 0]
     return SOT_tables
