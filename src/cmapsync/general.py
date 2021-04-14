@@ -33,15 +33,15 @@ def scan_all_tables_all_dB():
                     missing_index_from_child = TR.diff_between_parent_child_df(parent_index, child_index)
 
                     if missing_rows_from_child is not None:
-                        missing_rows_from_child.to_dataframe(SOT.report_dir + f"""{Table_Name}_{SOT.Parent}_{child_server}_data_table_mismatch.csv""",index=False)
+                        missing_rows_from_child.to_dataframe(SOT.report_dir + f"""{SOT.table_specific_reports_dir}{Table_Name}_{SOT.Parent}_{child_server}_data_table_mismatch.csv""",index=False)
                         report_df.append([Table_Name,child_server, date.today(), f"""Row count of {len(missing_rows_from_child)} between parent and child DBs"""])
 
                     if index_diff  is not None:
-                        write index_diff.to_dataframe(SOT.report_dir + f"""{Table_Name}_{SOT.Parent}_{child_server}_index_mismatch.csv""",index=False)
+                        write index_diff.to_dataframe(SOT.report_dir + f"""{SOT.table_specific_reports_dir}{Table_Name}_{SOT.Parent}_{child_server}_index_mismatch.csv""",index=False)
                         report_df.append([Table_Name,child_server, date.today(), f"""Indicies between parent and child DBs differ: {index_diff.to_string()}"""])
             else:
                 report_df.append([Table_Name,child_server, date.today(), "Table does not exist"])
-                
+    report_df.to_csv(SOT.report_dir + "CMAP_DB_sync_report.csv",index=False)
                 
 
 
