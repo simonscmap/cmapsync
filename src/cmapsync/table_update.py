@@ -10,7 +10,7 @@ User will then OK or Reject a table update to the child table
 """
 
 
-def update_table(diff_df, table_name,server):
+def update_table(diff_df, table_name, server):
     """Function will append missing rows to table in database
 
     Args:
@@ -19,5 +19,3 @@ def update_table(diff_df, table_name,server):
         server (string): CMAP server
     """
     DB.toSQLpandas(diff_df, tableName, server)
-
-
