@@ -20,6 +20,3 @@ def check_report():
     warning_df = read_warning_report()
     if warning_df.empty == False:
         send_warning(warning_df.to_markdown(index=False))
-
-
-check_report()
