@@ -33,7 +33,7 @@ def scan_db_table(Table_Name, child_server, report_df):
 
             if missing_rows_from_child.empty == False:
                 missing_rows_from_child.to_csv(
-                    f"""{SOT.table_specific_reports_dir}{Table_Name}_{SOT.Parent}_{child_server}_data_table_mismatch.csv""",
+                    f"""{SOT.table_specific_reports_dir}{Table_Name}.csv""",
                     index=False,
                 )
                 report_df.loc[len(report_df)] = [
@@ -69,11 +69,12 @@ def scan_all_tables_all_dB():
     # metadata_tables = TR.get_metadata_tables()
 
     # for Table_Name in tqdm(metadata_tables):
-    for Table_Name in tqdm(["tblSyncTest", "tblSensors"]):
+    for Table_Name in tqdm(["tblUsers"]):
+
         print(Table_Name)
         for child_server in SOT.Children:
             report_df = scan_db_table(Table_Name, child_server, report_df)
     report_df.to_csv(SOT.report_dir + SOT.report_name, index=False)
 
 
-# scan_all_tables_all_dB()
+scan_all_tables_all_dB()

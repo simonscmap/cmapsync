@@ -4,6 +4,19 @@ import numpy as np
 import pandas as pd
 
 
+def retrieve_pkey_column(Table_Name, server):
+    qry = f"""SELECT Col.Column_Name from 
+        INFORMATION_SCHEMA.TABLE_CONSTRAINTS Tab, 
+        INFORMATION_SCHEMA.CONSTRAINT_COLUMN_USAGE Col WHERE 
+        Col.Constraint_Name = Tab.Constraint_Name
+        AND Col.Table_Name = Tab.Table_Name
+        AND Constraint_Type = 'PRIMARY KEY'
+        AND Col.Table_Name = '{Table_Name}'"""
+
+    pkey_column = DB.dbRead(qry, server).iloc[0][0]
+    return pkey_column
+
+
 def retrieve_index_constraints(Table_Name, Server):
     """Retrieves a dataframe of indicies and constraints for a table on server
 
@@ -48,12 +61,33 @@ def checksum(Table_Name, Parent_Server, Child_Server):
     return checksum_result_dict
 
 
+def check_table_len_equal(Table_Name, Parent_Server, Child_Server):
+    """Returns dataframe containing rows in parent_df, but missing from child_df
+
+    Args:
+        Table_Name (string): Valid CMAP table name
+        parent_df (Pandas DataFrame): Designated parent df
+        child_df (Pandas DataFrame): Designanted child df
+
+    Returns:
+        table_len_equals_bool : Boolean
+    """
+    qry = f"""SELECT count(*) FROM [{Table_Name}]"""
+    len_parent = DB.dbRead(qry, Parent_Server)
+    len_child = DB.dbRead(qry, Child_Server)
+    if len_parent.iloc[0][0] == len_child.iloc[0][0]:
+        table_len_equals_bool = True
+    else:
+        table_len_equals_bool = False
+    return table_len_equals_bool
+
+
 def retrieve_table(Table_Name, server):
     """
 
     Args:
-        Table_Name ([type]): [description]
-        server ([type]): [description]
+        Table_Name (string): Valid CMAP table name
+        server (string): CMAP server
     """
     qry = f"""SELECT * FROM [{Table_Name}]"""
     df = DB.dbRead(qry, server)
