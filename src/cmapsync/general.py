@@ -1,3 +1,19 @@
+# issues:
+"""
+1. float dataframes diff 
+    - add 'coerce_float' flag into pd.read_sql
+2. update rows on mass
+    IDEAS:
+    -update row by row (if df less than?)
+    -create temp table, UPDATE or MERGE?
+    
+3. foreign key auto gen for front end tables
+
+
+
+"""
+
+
 from cmapingest import DB
 import SOT_relations as SOT
 import table_retrieval as TR
@@ -65,12 +81,10 @@ def scan_db_table(Table_Name, child_server, report_df):
 
 
 def scan_all_tables_all_dB():
-    report_df = pd.DataFrame(columns=["Table_Name", "Server", "date", "Message"])
-    # metadata_tables = TR.get_metadata_tables()
-
-    # for Table_Name in tqdm(metadata_tables):
-    for Table_Name in tqdm(["tblUsers"]):
-
+    report_df = pd.DataFrame(columns=["Table_Name", "Server", "Date", "Message"])
+    metadata_tables = TR.get_metadata_tables()
+    for Table_Name in tqdm(metadata_tables):
+        # for Table_Name in tqdm(["tblDataset_Cruises"]):
         print(Table_Name)
         for child_server in SOT.Children:
             report_df = scan_db_table(Table_Name, child_server, report_df)
