@@ -1,14 +1,10 @@
 # issues:
 """
-1. float dataframes diff 
-    - add 'coerce_float' flag into pd.read_sql
-2. update rows on mass
-    IDEAS:
-    -update row by row (if df less than?)
-    -create temp table, UPDATE or MERGE?
-    
-3. foreign key auto gen for front end tables
-
+fix index names
+get missing data tables 
+get out of sync metadata
+slack
+sync with SSMS
 
 
 """
@@ -23,7 +19,7 @@ from datetime import date
 from tqdm import tqdm
 
 
-def scan_db_table(Table_Name, child_server, report_df):
+def scan_db_metadata_table(Table_Name, child_server, report_df):
     # check that table exists on parent/child DBs
     table_exists_bool_parent = TR.check_table_exists(Table_Name, SOT.Parent)
     table_exists_bool_child = TR.check_table_exists(Table_Name, child_server)
@@ -80,15 +76,42 @@ def scan_db_table(Table_Name, child_server, report_df):
     return report_df
 
 
+def scan_db_data_table(Table_Name, child_server, report_df):
+    # check that table exists on parent/child DBs
+    table_exists_bool_parent = TR.check_table_exists(Table_Name, SOT.Parent)
+    table_exists_bool_child = TR.check_table_exists(Table_Name, child_server)
+    if table_exists_bool_parent == False:
+        report_df.loc[len(report_df)] = [
+            Table_Name,
+            SOT.parent,
+            date.today(),
+            "Table does not exist",
+        ]
+    if table_exists_bool_child == False:
+        report_df.loc[len(report_df)] = [
+            Table_Name,
+            child_server,
+            date.today(),
+            "Table does not exist",
+        ]
+    return report_df
+
+
 def scan_all_tables_all_dB():
     report_df = pd.DataFrame(columns=["Table_Name", "Server", "Date", "Message"])
     metadata_tables = TR.get_metadata_tables()
+    print("scanning metadata tables")
     for Table_Name in tqdm(metadata_tables):
-        # for Table_Name in tqdm(["tblDataset_Cruises"]):
         print(Table_Name)
-        for child_server in SOT.Children:
-            report_df = scan_db_table(Table_Name, child_server, report_df)
+        report_df = scan_db_metadata_table(Table_Name, SOT.Children[0], report_df)
+
+    print("scanning data tables")
+    data_tables = TR.get_catalog_datasets()
+    for Table_Name in tqdm(data_tables):
+        print(Table_Name)
+        report_df = scan_db_data_table(Table_Name, SOT.Children[0], report_df)
+
     report_df.to_csv(SOT.report_dir + SOT.report_name, index=False)
 
 
-scan_all_tables_all_dB()
+# scan_all_tables_all_dB()

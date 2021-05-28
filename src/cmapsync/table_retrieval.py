@@ -25,7 +25,7 @@ def retrieve_index_constraints(Table_Name, Server):
         Server (string): CMAP server name
 
     Returns:
-        Pandas DataFrame: A DataFrame contining any indicies or constraints 
+        Pandas DataFrame: A DataFrame contining any indicies or constraints
     """
     qry = f"""SELECT
     [schema] = OBJECT_SCHEMA_NAME([object_id]),
@@ -133,7 +133,7 @@ def check_table_exists(Table_Name, server):
 def get_catalog_datasets():
     """This function returns a list of datasets from uspCatalog. Server/SOT is supplied from SOT_relations.py
     Returns:
-        Pandas Series : Series of all tables from uspCatalog. 
+        Pandas Series : Series of all tables from uspCatalog.
     """
     SOT_catalog_datasets = DB.dbRead("""EXEC uspCatalog""", server=SOT.Parent)[
         "Table_Name"
