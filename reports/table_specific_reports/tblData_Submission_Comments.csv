@@ -1,0 +1,75 @@
+ID,Data_Submission_ID,Commenter_ID,Comment,Comment_Date_Time
+260,121,5,"Hi there Evan, 
+Sorry about the submission guide misinformation. Apparently we need to update it, so thanks for the catch! We removed in-situ as a category since it's so broad. I added PCR to the options. If you think of a better sensor type, I can add that instead.
+
+Rhonda and I went through and both did a QA. Below are our comments. Let us know if we can clarify anything.
+
+dataset_meta_data:
+-dataset_long_name: Perhaps include HOT or Hawaii Ocean Time-series or Station Aloha in the long name. Also capitalization.
+-dataset_source: Maybe Univ -> University
+-For the dataset description, could you add a starting paragraph that describes the dataset a bit. Perhaps about the projects goals, the site, the time range etc. Imagine someone with no background in this dataset trying to figure out what it was.
+-cruise_names: To link your dataset to cruise trajectories, we would like to have the HOT cruises in the cruise_names columns. We realize this is a bit of work and if it works for you, we can fill out this column, then send it back to you for review.
+
+vars_meta_data:
+-var_long_name. Mind adding consistent capitalization of words? Also maybe add the organism names as well. For instance: nifH UCYN-A/GroupA, nifH Crocosphaera/Group B 
+-var_unit-  maybe ""gene copies L-1""? 
+-var_keywords: Some suggestions: diazotroph, insitu, in situ, in-situ, list of cruise names
+-var_comment: BD=Below Detection is now a comment relic and can be removed.. Also, the new flag columns should have some info on what 0 vs 1 means.
+
+Thanks again!
+
+-Raphael",2021-04-19 14:37:11.506666
+261,121,100,"Hi Raphael, 
+
+I have made a few changes to the datasheet and resubmitted it. This has been a lot of work to re-ingest a file that a date corrected.  It would be great if you can add the cruise names to this file and I can review it.  Once that is done and there wont be more changes to the files I can get a DOI for it and would like to have the file ingested.
+
+Thanks,
+Evan",2021-04-23 13:58:11.223333
+262,121,5,"Hi there Evan,
+
+Thanks for making the changes! We'll add the cruises and get it back to you to review then grab a DOI and be done with it.
+
+Thanks again for all the back and forth.
+
+Cheers,
+-Raphael",2021-04-23 19:11:37.210000
+263,121,5,"Hi there Evan,
+
+Just send you an email with the revised dataset. Mind getting a DOI for it and resubmitting it. Then we can get it ingested.
+
+Cheers,
+-Raphael",2021-04-26 13:47:35.806666
+264,121,5,"DOI:
+https://doi.org/10.5281/zenodo.4728253",2021-05-05 11:18:59.973333
+265,146,5,"Hi there Gerid,
+
+Thanks for submitting this dataset. We'll take a look over it and get your some feedback.
+
+Best,
+-Raphael",2021-05-20 18:57:13.603333
+266,146,5,"Hi there Gerid,
+
+Thanks for submitting a dataset to CMAP.
+We have reviewed your dataset and have some comments/feedback organized by excel sheet. Please let us know if we can clarify anything. 
+
+data sheet:
+-Should lon be -158?
+
+dataset_meta_data sheet:-dataset_short_name: 
+Could the cruise UNOLS name + nickname be included?
+-dataset_long_name: Could the cruise UNOLS name + nickname be included.  
+-dataset_source: Consider adding lab group/PI name.
+-dataset_distributor: If not provided, leave blank
+-dataset_history: If not provided, leave blank
+-dataset_description: Consider adding where samples were collected. If there is additional context, such as this dataset being part of a larger sampling program, consider including larger goals/context as applicable. Is there any additional information that would help a user with a different but related background understand the dataset (spell out acronyms, explain how slides were analyzed, etc.)?
+-dataset_references: Are there any papers that could be added here. Also, is there a full NCBI bioproject link for the 'PRJNA358725'?
+-cruise_names: Could you add the official UNOLS cruise name as well as any nicknames (For example. if this was a Gradients 3 dataset, you could add both KM1906 and Gradients 3)
+
+vars_meta_data
+-var_long_name: For these entries, would it be possible to spell some of them out? This would help those who are not as familiar with the data. ex. Het to Heterotrophic
+-var_keywords: Could you add a few more keywords? These aid in the discoverability of the dataset. Some possible additions: spaces in 'PlanktonProtistTime-series', cruise name, cruise nickname, collection method, ocean region(s), ship name, lab name, university name, names of researchers associated with the dataset, university name, university acronym, sensor type, study domain, scientific discipline, insitu, in-situ, any methods/sensors, additional/alternative names for variables.
+-var_comment: If there are no comments, please leave blank.
+
+Thanks again!
+-Raphael",2021-05-21 19:31:34.580000
+267,138,75,Hello,2021-05-24 15:27:48.606666

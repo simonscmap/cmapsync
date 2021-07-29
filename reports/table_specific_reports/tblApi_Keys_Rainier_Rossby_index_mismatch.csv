@@ -1,0 +1,3 @@
+schema,table,index,is_unique_constraint,is_unique,is_primary_key
+dbo,tblApi_Keys,PK_tblApi_Keys,False,True,True
+dbo,tblApi_Keys,UQ_tblApi_Keys,True,True,False

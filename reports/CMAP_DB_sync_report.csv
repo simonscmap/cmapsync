@@ -1,0 +1,39 @@
+Table_Name,Server,Date,Message
+tblApi_Calls,Rossby,2021-05-24,Row diff of 127195 between parent and child DBs
+tblApi_Calls,Rossby,2021-05-24,"Indicies between parent and child DBs differ:   schema         table            index  is_unique_constraint  is_unique  is_primary_key
+0    dbo  tblApi_Calls  PK_tblApi_Calls                 False       True            True"
+tblApi_Keys,Rossby,2021-05-24,Row diff of 2 between parent and child DBs
+tblApi_Keys,Rossby,2021-05-24,"Indicies between parent and child DBs differ:   schema        table           index  is_unique_constraint  is_unique  is_primary_key
+0    dbo  tblApi_Keys  PK_tblApi_Keys                 False       True            True
+1    dbo  tblApi_Keys  UQ_tblApi_Keys                  True       True           False"
+tblData_Submission_Comments,Rossby,2021-05-24,Row diff of 8 between parent and child DBs
+tblData_Submission_Comments,Rossby,2021-05-24,"Indicies between parent and child DBs differ:   schema                        table                           index  is_unique_constraint  is_unique  is_primary_key
+0    dbo  tblData_Submission_Comments  PK_tblData_Submission_Comments                 False       True            True"
+tblData_Submission_Files,Rossby,2021-05-24,Row diff of 5 between parent and child DBs
+tblData_Submission_Files,Rossby,2021-05-24,"Indicies between parent and child DBs differ:   schema                     table                        index  is_unique_constraint  is_unique  is_primary_key
+0    dbo  tblData_Submission_Files  PK_tblData_Submission_Files                 False       True            True"
+tblData_Submissions,Rossby,2021-05-24,Row diff of 4 between parent and child DBs
+tblData_Submissions,Rossby,2021-05-24,"Indicies between parent and child DBs differ:   schema                table                   index  is_unique_constraint  is_unique  is_primary_key
+0    dbo  tblData_Submissions  PK_tblData_Submissions                 False       True            True"
+tblDatasets,Rossby,2021-05-24,Row diff of 131 between parent and child DBs
+tblFront_End_Errors,Rossby,2021-05-24,Row diff of 71 between parent and child DBs
+tblGuest_Tokens,Rossby,2021-05-24,Row diff of 11 between parent and child DBs
+tblGuest_Tokens,Rossby,2021-05-24,"Indicies between parent and child DBs differ:   schema            table                           index  is_unique_constraint  is_unique  is_primary_key
+0    dbo  tblGuest_Tokens  PK__tblGuest__3214EC277893A377                 False       True            True"
+tblGuest_Tokens_Issued_Hourly,Rossby,2021-05-24,Row diff of 9 between parent and child DBs
+tblPisces_Depth,Rossby,2021-05-24,Table does not exist
+tblPisces_NRT_Calendar,Rossby,2021-05-24,Table does not exist
+tblSyncTest,Rossby,2021-05-24,Table does not exist
+tblUser_Dataset_Favorites,Rossby,2021-05-24,Row diff of 1 between parent and child DBs
+tblUser_Dataset_Favorites,Rossby,2021-05-24,"Indicies between parent and child DBs differ:   schema                      table                         index  is_unique_constraint  is_unique  is_primary_key
+0    dbo  tblUser_Dataset_Favorites  PK_tblUser_Dataset_Favorites                 False       True            True"
+tblUsers,Rossby,2021-05-24,Row diff of 1 between parent and child DBs
+tblVariables,Rossby,2021-05-24,Row diff of 2258 between parent and child DBs
+tblWind_NRT,Rossby,2021-05-24,Table does not exist
+tblPisces_NRT,Rossby,2021-05-24,Table does not exist
+tblArgoMerge_REP,Rossby,2021-05-24,Table does not exist
+tblMercator_MLD_NRT,Rossby,2021-05-24,Table does not exist
+tblBottle_Chisholm,Rossby,2021-05-24,Table does not exist
+tblMGL1704_Gradients2_PPPCPN_UW,Rossby,2021-05-24,Table does not exist
+tblHOT_Flow_Cytometry_Time_Series,Rossby,2021-05-24,Table does not exist
+tblKM1906_Gradients3_Profiling_Float,Rossby,2021-05-24,Table does not exist

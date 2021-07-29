@@ -1,0 +1,2 @@
+schema,table,index,is_unique_constraint,is_unique,is_primary_key
+dbo,tblApi_Calls,PK_tblApi_Calls,False,True,True

@@ -1,0 +1,2 @@
+schema,table,index,is_unique_constraint,is_unique,is_primary_key
+dbo,tblData_Submissions,PK_tblData_Submissions,False,True,True

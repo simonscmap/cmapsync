@@ -1,0 +1,5 @@
+ID,Filename_Root,Phase_ID,Submitter_ID,Start_Date_Time,Data_Source,Dataset_Long_Name,Ingestion_Date_Time,QC1_Completion_Date_Time,QC1_Completed_By,QC2_Completion_Date_Time,QC2_Completed_By,DOI_Accepted_Date_Time
+121,HOT_nifH_gene_abundances                                                                                                          ,6,100,2021-01-13 13:58:11.480000,Submitted before data source was recorded,Submitted before dataset long name was recorded,2021-05-05 11:19:03.930000,2021-04-15 14:56:07.526666,5.0,,,
+146,Planktonic_food_web_structure,3,50,2021-05-19 18:48:29.616666,University of Southern California,Planktonic food web structure at a coastal site.,,,,,,
+147,HOT_PP,2,168,2021-05-20 18:05:45.073333,"Hawaii Ocean Time-series (HOT), Dave Karl",HOT Primary Production and Flow Cytometry,,,,,,
+148,MikeIsTestingStuff52421,4,75,2021-05-24 15:27:25.576666,The source is Mike. Wanna fight about it?,Mike is testing on 5-18-21 and this is a long name,,,,2021-05-24 15:28:29.863333,75.0,
