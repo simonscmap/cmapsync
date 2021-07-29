@@ -1,14 +1,21 @@
+"""
+Author: Norland Raphael Hagen <norlandrhagen@gmail.com>
+Date: 07-29-2021
+
+cmapsync - SOT Relations - source of Truth relations for Parent/child DB's
+"""
+
+
 ### Source of Truth (SOT) Parent Child Table Relations
 db = "opedia"
 Parent = "Rainier"
-# Children = ["Mariana","Rossby"]
-Children = ["Rossby"]
+Children = ["Mariana","Rossby"]
 
 
 ### Email Report Address ###
 
-curator_email = "nrhagen@uw.edu"
-gmail_addr = "norlandrhagen@gmail.com"
+curator_email = "{INSERT EMAIL}
+gmail_addr = "{INSERT GMAIL ADDRESS FOR SENDING}
 
 ### Report Directory ###
 report_dir = "../../reports/"

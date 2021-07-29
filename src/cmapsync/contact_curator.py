@@ -1,3 +1,11 @@
+"""
+Author: Norland Raphael Hagen <norlandrhagen@gmail.com>
+Date: 07-29-2021
+
+cmapsync - contact_curator - Functionality to send report via email. 
+Edit emails in SOT_Relations.py
+"""
+
 import yagmail
 import pandas as pd
 import SOT_relations as SOT

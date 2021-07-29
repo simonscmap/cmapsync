@@ -1,10 +1,26 @@
-from cmapingest import DB
+"""
+Author: Norland Raphael Hagen <norlandrhagen@gmail.com>
+Date: 07-29-2021
+
+cmapsync - table_retrieval - column, table, index retrival functions.
+Requires DB functionality/connection information from cmapdata/ingest
+"""
+
+from cmapdata.ingest import DB
 from cmapsync import SOT_relations as SOT
 import numpy as np
 import pandas as pd
 
 
 def retrieve_pkey_column(Table_Name, server):
+    """Retrieves column name containing primary key
+
+    Args:
+        Table_Name (str): CMAP table name
+        Server (str): Valid CMAP server name. ex. Rainier
+
+    Returns: Column name
+    """
     qry = f"""SELECT Col.Column_Name from 
         INFORMATION_SCHEMA.TABLE_CONSTRAINTS Tab, 
         INFORMATION_SCHEMA.CONSTRAINT_COLUMN_USAGE Col WHERE 
@@ -21,8 +37,8 @@ def retrieve_index_constraints(Table_Name, Server):
     """Retrieves a dataframe of indicies and constraints for a table on server
 
     Args:
-        Table_Name (string): valid CMAP table name
-        Server (string): CMAP server name
+        Table_Name (str): valid CMAP table name
+        Server (str): Valid CMAP server name. ex. Rainier
 
     Returns:
         Pandas DataFrame: A DataFrame contining any indicies or constraints 
@@ -65,7 +81,7 @@ def check_table_len_equal(Table_Name, Parent_Server, Child_Server):
     """Returns dataframe containing rows in parent_df, but missing from child_df
 
     Args:
-        Table_Name (string): Valid CMAP table name
+        Table_Name (str): Valid CMAP table name
         parent_df (Pandas DataFrame): Designated parent df
         child_df (Pandas DataFrame): Designanted child df
 
@@ -86,8 +102,8 @@ def retrieve_table(Table_Name, server):
     """
 
     Args:
-        Table_Name (string): Valid CMAP table name
-        server (string): CMAP server
+        Table_Name (str): Valid CMAP table name
+        Server (str): Valid CMAP server name. ex. Rainier
     """
     qry = f"""SELECT * FROM [{Table_Name}]"""
     df = DB.dbRead(qry, server)
@@ -148,7 +164,6 @@ def get_DB_tables():
     """
     SOT_tables = DB.dbRead(
         f"""SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_CATALOG='{SOT.db}' AND TABLE_NAME <> 'sysdiagrams' and TABLE_NAME NOT IN 
-        ('tblArgoBGC_REP',
         'tblArgo_Metadata',
         'tblCyanoML',
         'tblCyanoML_sst',

@@ -1,20 +1,12 @@
-# issues:
 """
-1. float dataframes diff 
-    - add 'coerce_float' flag into pd.read_sql
-2. update rows on mass
-    IDEAS:
-    -update row by row (if df less than?)
-    -create temp table, UPDATE or MERGE?
-    
-3. foreign key auto gen for front end tables
+Author: Norland Raphael Hagen <norlandrhagen@gmail.com>
+Date: 07-29-2021
 
-
-
+cmapsync - general.Py - General function for DB table/index scanning.
+Requires functionality from cmapdata/ingest
 """
 
-
-from cmapingest import DB
+from cmapdata.ingest import DB
 import SOT_relations as SOT
 import table_retrieval as TR
 import numpy as np
@@ -24,6 +16,16 @@ from tqdm import tqdm
 
 
 def scan_db_table(Table_Name, child_server, report_df):
+    """Compares tables from parent/child DB's and generates a report.
+
+    Args:
+        Table_Name (str): CMAP table name
+        child_server (str): Valid CMAP server name. Designate in SOT relations.
+        report_df (Pandas DataFrame): report dataframe to append information
+
+    Returns:
+        report_df (Pandas DataFrame): report dataframe with information appended
+    """
     # check that table exists on parent/child DBs
     table_exists_bool_parent = TR.check_table_exists(Table_Name, SOT.Parent)
     table_exists_bool_child = TR.check_table_exists(Table_Name, child_server)
@@ -81,6 +83,8 @@ def scan_db_table(Table_Name, child_server, report_df):
 
 
 def scan_all_tables_all_dB():
+    """Wrapper function for scan_db_table function. Iterates through tables, generating comparative reports. 
+    """
     report_df = pd.DataFrame(columns=["Table_Name", "Server", "Date", "Message"])
     metadata_tables = TR.get_metadata_tables()
     for Table_Name in tqdm(metadata_tables):
@@ -91,4 +95,4 @@ def scan_all_tables_all_dB():
     report_df.to_csv(SOT.report_dir + SOT.report_name, index=False)
 
 
-scan_all_tables_all_dB()
+# scan_all_tables_all_dB()

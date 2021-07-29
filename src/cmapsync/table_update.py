@@ -1,19 +1,13 @@
-# devnote:apr23,2021: When fixing tblVariables, there is still a disagreement betwen parent/child tables
-# The floats seem to be slightly diff. May need a tolerence added to the join: https://stackoverflow.com/questions/48790335/how-to-merge-efficiently-two-dataframes-with-a-tolerance-in-python
+"""
+Author: Norland Raphael Hagen <norlandrhagen@gmail.com>
+Date: 07-29-2021
 
-# dev note apr26th:
-# change retrieval logic
-# if checksum doesn't match...
-# does len(df1) == len(df2) (compute on DB side)
-# if len doesn't match, update missing rows
-# idea #1, get primary key of table from sys.information, get left outer join on ID key.
-# get rows with missing ID's from parent, update child tale
-#
-# if len matches, one of the entries needs updating (use pandas.DataFrame.compare)
-#      then find a way to use 'update' set as formatting
+cmapsync - table_update - Some table update functionallity. Fragment.
+Requires DB functionality/connection information from cmapdata/ingest
+"""
 
 
-from cmapingest import DB
+from cmapdata.ingest import DB
 import SOT_relations as SOT
 import table_retrieval as TR
 import pandas as pd
@@ -22,69 +16,6 @@ import sqlalchemy
 import numpy as np
 from tqdm import tqdm
 import pandas.io.sql as sql
-
-
-def dbRead(query, server="Rainier"):
-    conn, cursor = DB.dbConnect(server)
-    df = sql.read_sql(query, conn, coerce_float=True)
-    conn.close()
-    return df
-
-
-def toSQLpandas(df, tableName, server):
-    conn_str = DB.pyodbc_connection_string(server)
-    quoted_conn_str = DB.urllib_pyodbc_format(conn_str)
-    engine = sqlalchemy.create_engine(
-        "mssql+pyodbc:///?odbc_connect={}".format(quoted_conn_str),
-        fast_executemany=True,
-    )
-    df.to_sql(
-        tableName,
-        con=engine,
-        if_exists="append",
-        method="multi",
-        chunksize=100,
-        index=False,
-    )
-
-    # df.to_sql(
-    #     tableName,
-    #     con=engine,
-    #     if_exists="replace",
-    #     method="multi",
-    #     chunksize=100,
-    #     index=False,
-    # )
-
-
-def toSQLbcp_wrapper(df, tableName, server):
-    export_path = "temp_bcp.csv"
-    df.to_csv(export_path, index=False, line_terminator="\n")
-    toSQLbcp(export_path, tableName, server)
-    os.remove(export_path)
-
-
-def toSQLbcp(export_path, tableName, server):
-
-    usr, psw, ip, port, db_name, TDS_Version = DB.server_select_credentials(server)
-    bcp_str = (
-        """bcp Opedia.dbo."""
-        + tableName
-        + """ in """
-        + """'"""
-        + export_path
-        + """'"""
-        # + """ -e error -F 2 -c -t, -U  """
-        + """ -E -e error -F 2 -c -t, -U  """
-        + usr
-        + """ -P """
-        + psw
-        + """ -S """
-        + ip
-        + ""","""
-        + port
-    )
-    os.system(bcp_str)
 
 
 def remove_csv(Table_Name):
@@ -108,7 +39,7 @@ def update_table(diff_df, table_name, server):
     """
 
     DB.DB_modify(f"""SET IDENTITY_INSERT [{table_name}] ON""", server)
-    toSQLpandas(diff_df, table_name, server)
+    DB.toSQLpandas(diff_df, table_name, server)
     DB.DB_modify(f"""SET IDENTITY_INSERT [{table_name}] OFF""", server)
 
     print(table_name, " updated")
@@ -180,7 +111,7 @@ def SQL_Merge():
     FROM {temp_table_name}
     WHERE NOT EXISTS (SELECT col FROM tbl_A A2 WHERE A2.col = tbl_B.col); 
 """
-toSQLpandas(diff_df, f"""temp_{table_name}""", "Mariana")
+DB.toSQLpandas(diff_df, f"""temp_{table_name}""", "Mariana")
 tblA = "tblUsers"
 tblB = "temp_tblUsers"
 cols = str(tuple(list(diff_df))).replace("'", "")
