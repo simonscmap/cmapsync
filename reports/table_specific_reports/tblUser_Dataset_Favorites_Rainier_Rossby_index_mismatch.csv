@@ -1,2 +1,0 @@
-schema,table,index,is_unique_constraint,is_unique,is_primary_key
-dbo,tblUser_Dataset_Favorites,PK_tblUser_Dataset_Favorites,False,True,True
