@@ -1,15 +1,6 @@
 """
-<<<<<<< HEAD
 Author: Norland Raphael Hagen <norlandrhagen@gmail.com>
 Date: 07-29-2021
-=======
-fix index names
-get missing data tables 
-get out of sync metadata
-slack
-sync with SSMS
-
->>>>>>> 980312db474b09879619ae718fcde596f52f59f2
 
 cmapsync - general.Py - General function for DB table/index scanning.
 Requires functionality from cmapdata/ingest
@@ -24,7 +15,6 @@ from datetime import date
 from tqdm import tqdm
 
 
-<<<<<<< HEAD
 def scan_db_table(Table_Name, child_server, report_df):
     """Compares tables from parent/child DB's and generates a report.
 
@@ -36,9 +26,6 @@ def scan_db_table(Table_Name, child_server, report_df):
     Returns:
         report_df (Pandas DataFrame): report dataframe with information appended
     """
-=======
-def scan_db_metadata_table(Table_Name, child_server, report_df):
->>>>>>> 980312db474b09879619ae718fcde596f52f59f2
     # check that table exists on parent/child DBs
     table_exists_bool_parent = TR.check_table_exists(Table_Name, SOT.Parent)
     table_exists_bool_child = TR.check_table_exists(Table_Name, child_server)
