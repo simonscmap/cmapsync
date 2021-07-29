@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 """
 Author: Norland Raphael Hagen <norlandrhagen@gmail.com>
 Date: 07-29-2021
@@ -9,9 +8,6 @@ Requires DB functionality/connection information from cmapdata/ingest
 
 
 from cmapdata.ingest import DB
-=======
-from cmapingest import DB
->>>>>>> 38cbe974b2d9a829d7d336b803a1f924a0a55f8a
 import SOT_relations as SOT
 import table_retrieval as TR
 import pandas as pd
@@ -80,10 +76,7 @@ def SQL_Merge():
     WHEN NOT MATCHED BY TARGET
     THEN INSERT (ProductID, ProductName, Rate) VALUES (SOURCE.ProductID, SOURCE.ProductName, SOURCE.Rate)
 
-
-<<<<<<< HEAD
-"""
-   INSERT tbl_A (col, col2)  
+    INSERT tbl_A (col, col2)  
     SELECT col, col2
     FROM tbl_B
     WHERE NOT EXISTS (SELECT col FROM tbl_A A2 WHERE A2.col = tbl_B.col); 
@@ -92,8 +85,9 @@ def SQL_Merge():
     INSERT {table_name} tuple(list(df))
     SELECT *
     FROM {temp_table_name}
-    WHERE NOT EXISTS (SELECT col FROM tbl_A A2 WHERE A2.col = tbl_B.col); 
-"""
+    WHERE NOT EXISTS (SELECT col FROM tbl_A A2 WHERE A2.col = tbl_B.col); """
+
+
 DB.toSQLpandas(diff_df, f"""temp_{table_name}""", "Mariana")
 tblA = "tblUsers"
 tblB = "temp_tblUsers"
@@ -106,16 +100,9 @@ FROM {tblB}
 WHERE NOT EXISTS (SELECT {cols} FROM {tblA} A2 WHERE
 
 
-)
+)"""
 
-"""
 
 # r_users = DB.dbRead(f"""SELECT * FROM {table_name}""", server='Rainier')
 # m_users = DB.dbRead(f"""SELECT * FROM {table_name}""", server='Mariana')
-=======
-    # --When there is a row that exists in target and same record does not exist in source then delete this record target
-    # WHEN NOT MATCHED BY SOURCE
-    # THEN DELETE
->>>>>>> 38cbe974b2d9a829d7d336b803a1f924a0a55f8a
 
-    """
